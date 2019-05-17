@@ -3,12 +3,28 @@ require 'byebug'
 require 'database_cleaner'
 require 'gossips'
 
+require 'activerecord/base'
+
 Gossips.configure do |config|
   config.elasticsearch.log = true
   config.elasticsearch.refresh = true
+  config.elasticsearch.index = "gossips_test_#{Time.now.to_i + rand(999)}"
 end
 
 RSpec.configure do |config|
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:all) do
+    Gossips::Search::Index.create!
+  end
+
+  config.after(:all) do
+    Gossips::Search::Index.delete!
+  end
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

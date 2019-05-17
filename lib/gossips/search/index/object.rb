@@ -2,8 +2,8 @@ module Gossips
   class Search
     class Index
       class Object
-        def initialize(object)
-          @object = JSON.parse(object)
+        def initialize(object = {})
+          @object = object.is_a?(Hash) ? object.stringify_keys : JSON.parse(object)
         end
 
         def id
@@ -14,11 +14,12 @@ module Gossips
           {
             object_type: @object['model'],
             object_id: @object['id'],
-            object_created_at: @object['created_at'],
+            object_created_at: @object['created_at'].try(:strftime, '%Y-%m-%d %H:%M:%S'),
             tag_id: @object['tag_id'],
+            tag_object: @object['tag_object'],
             tag_type: @object['tag_type'],
             tag_name: @object['tag_name'],
-            last_updated: @object['updated_at']
+            last_updated: @object['last_updated'].try(:strftime, '%Y-%m-%d %H:%M:%S')
           }
         end
       end
