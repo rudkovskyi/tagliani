@@ -6,6 +6,15 @@ ActiveRecord::Schema.define do
     t.string :sticker, default: 'default'
   end
 
+  create_table :hashtags, force: true do |t|
+    t.string :name, index: { unique: true }
+    t.string :sticker, default: 'default'
+  end
+
+  create_table :tweets, force: true do |t|
+    t.string :body
+  end
+
   create_table :artists, force: true do |t|
     t.string :name
   end

@@ -5,6 +5,7 @@ module Gossips
         def initialize(parent = nil)
           @parent = parent
           @index = Gossips::Search::Index.new
+          @tag_kls = @parent.class._tag_kls.constantize
           
           super(search)
         end
@@ -14,10 +15,10 @@ module Gossips
             options = hash.slice(:name)
 
             begin
-              record = Tag.find_or_initialize_by(options)
+              record = @tag_kls.find_or_initialize_by(options)
               record.save
             rescue ActiveRecord::RecordNotUnique
-              record = Tag.find_by(options)
+              record = @tag_kls.find_by(options)
             end
 
             @index.add!({

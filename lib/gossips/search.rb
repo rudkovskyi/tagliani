@@ -26,7 +26,7 @@ module Gossips
 
     def serialize(type:)
       model_kls = "#{type}_kls"
-      model_id = type == 'object' ? 'object_id' : 'tag_id'
+      model_id = "#{type}_id"
 
       models = {}
 

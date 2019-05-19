@@ -8,6 +8,8 @@ ActiveRecord::Base.establish_connection adapter: 'sqlite3', database: ':memory:'
 require_relative 'schema'
 
 require_relative 'models/tag'
+require_relative 'models/hashtag'
+require_relative 'models/tweet'
 require_relative 'models/song'
 require_relative 'models/artist'
 require_relative 'models/album'

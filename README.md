@@ -12,6 +12,20 @@ gem 'gossips'
 
 And run `bundle install` command.
 
+## Search
+
+Let's say inside the Rails application you have a model "Hashtag" that represents all the tags attached to the model "Tweet".
+
+```ruby
+class Hashtag < ActiveRecord::Base
+  include Gossips::Concerns::Search
+end
+
+class Tweet < ActiveRecord::Base
+  taggable tag_kls: "Hashtag"
+end
+```
+
 ### Requirements
 
 * ActiveRecord

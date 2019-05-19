@@ -27,8 +27,9 @@ module Gossips
   def taggable(options = {})
     Models.tagged << to_s
 
-    class_attribute :_inherit_gossip
+    class_attribute :_inherit_gossip, :_tag_kls
     self._inherit_gossip = options[:inherit]
+    self._tag_kls = options[:tag_kls] || 'Tag'
 
     class_eval do
       include Concerns::Taggable
