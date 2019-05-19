@@ -39,22 +39,23 @@ To list the attached tags you can run
 tweet.tags
 ```
 
-It will return you Array of Hashtag objects in this case.
+It will return you Array of Hashtag objects attached to the tweet.
 
 ```ruby
 [#<Hashtag id: 2, name: "#followme", sticker: "default">]
 ```
 
-If you want to search for all tweets attached to the `Hashtag` model with a name `#followme` you can do:
+If you want to search for all tweets attached to the `Hashtag` model with a name `#followme` you can run
 
 ```ruby
 Hashtag.search(where: { tag_name: ['#followme'], tag_kls: ['Hashtag'] }
 ```
 
-Which returns:
+Tag name represents the `name` field of the `Hashtag` model.
 
 ```ruby
-[#<Tweet id: 3, body: "Tweet #0">, #<Tweet id: 4, body: "Tweet #1">, #<Tweet id: 5, body: "Tweet #2">, #<Tweet id: 6, body: "Follow @rrubyist on Twitter">]
+[#<Tweet id: 3, body: "Tweet #0">, #<Tweet id: 4, body: "Tweet #1">, 
+#<Tweet id: 5, body: "Tweet #2">, #<Tweet id: 6, body: "Follow @rrubyist on Twitter">]
 ```
 
 ### Requirements
