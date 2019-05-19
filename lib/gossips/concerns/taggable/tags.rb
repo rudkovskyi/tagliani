@@ -6,6 +6,7 @@ module Gossips
           @parent = parent
           @index = Gossips::Search::Index.new
           @tag_kls = @parent.class._tag_kls.constantize
+          @async = @parent.class._async
           
           super(search)
         end
@@ -30,7 +31,7 @@ module Gossips
               tag_type: record.sticker,
               tag_name: record.name,
               last_updated: Time.now
-            })
+            }, @async)
           end
         end
 

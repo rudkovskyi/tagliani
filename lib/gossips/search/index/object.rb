@@ -22,6 +22,10 @@ module Gossips
             last_updated: @object['last_updated'].try(:strftime, '%Y-%m-%d %H:%M:%S')
           }
         end
+
+        def to_json
+          to_h.to_json
+        end
       end
     end
   end
