@@ -12,11 +12,11 @@ module Gossips
 
         def to_h
           {
-            object_type: @object['model'],
+            object_kls: @object['model'],
             object_id: @object['id'],
             object_created_at: @object['created_at'].try(:strftime, '%Y-%m-%d %H:%M:%S'),
             tag_id: @object['tag_id'],
-            tag_object: @object['tag_object'],
+            tag_kls: @object['tag_kls'],
             tag_type: @object['tag_type'],
             tag_name: @object['tag_name'],
             last_updated: @object['last_updated'].try(:strftime, '%Y-%m-%d %H:%M:%S')

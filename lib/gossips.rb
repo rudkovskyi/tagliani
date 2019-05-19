@@ -3,6 +3,7 @@ require_relative "gossips/search"
 require_relative "gossips/version"
 require_relative "gossips/models"
 require_relative "gossips/concerns/taggable"
+require_relative "gossips/concerns/search"
 
 require 'byebug'
 require 'securerandom'

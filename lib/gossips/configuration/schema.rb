@@ -41,7 +41,7 @@ module Gossips
 	    doc: {
 	      properties: {
 		query: { type: 'percolator' },
-		object_type: {
+		object_kls: {
 		  type: 'keyword',
 		  index: true
 		},
@@ -49,7 +49,7 @@ module Gossips
 		created_at: { type: 'date', format: 'yyyy-MM-dd HH:mm:ss' },
 		updated_at: { type: 'date', format: 'yyyy-MM-dd HH:mm:ss' },
 		tag_id: { type: 'integer' },
-		tag_object: { type: 'keyword', index: true },
+		tag_kls: { type: 'keyword', index: true },
 		tag_name: {
 		  type: 'text',
 		  analyzer: 'gossipAnalyzer'

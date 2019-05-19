@@ -25,7 +25,7 @@ module Gossips
               id: @parent.id,
               created_at: @parent.try(:created_at),
               tag_id: record.id,
-              tag_object: record.class.to_s,
+              tag_kls: record.class.to_s,
               tag_type: record.sticker,
               tag_name: record.name,
               last_updated: Time.now
@@ -38,31 +38,14 @@ module Gossips
             query: {
               bool: {
                 must: [
-                  { match: { object_type: @parent.class.to_s } },
+                  { match: { object_kls: @parent.class.to_s } },
                   { term: { object_id: @parent.id } }
                 ]
               }
             }
           })
 
-          parse(Gossips::Search.new(body).response['hits']['hits'])
-        end
-
-        private
-
-        def parse(hits)
-          models = {}
-
-          hits.each do |entry|
-            entry_source = entry['_source']
-            class_name = entry_source['tag_object']
-            models[class_name] ||= []
-            models[class_name] << entry_source['tag_id']
-          end
-
-          models.flat_map do |model, ids|
-            model.constantize.where(id: ids)
-          end
+          Gossips::Search.new(body).serialize(type: 'tag')
         end
       end
     end

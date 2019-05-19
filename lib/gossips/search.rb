@@ -23,5 +23,23 @@ module Gossips
     def response
       @client.search(index: @index, body: @query)
     end
+
+    def serialize(type:)
+      model_kls = "#{type}_kls"
+      model_id = type == 'object' ? 'object_id' : 'tag_id'
+
+      models = {}
+
+      response['hits']['hits'].each do |entry|
+        entry_source = entry['_source']
+        class_name = entry_source[model_kls]
+        models[class_name] ||= []
+        models[class_name] << entry_source[model_id]
+      end
+
+      models.flat_map do |model, ids|
+        model.constantize.where(id: ids)
+      end
+    end
   end
 end

@@ -33,7 +33,7 @@ RSpec.describe Gossips::Search::Index do
             doc: {
               properties: {
                 query: { type: 'percolator' },
-                object_type: { type: 'keyword', index: true },
+                object_kls: { type: 'keyword', index: true },
                 object_id: { type: 'integer' },
                 object_created_at: { type: 'date', format: 'yyyy-MM-dd HH:mm:ss' },
                 tag_id: { type: 'integer' },
