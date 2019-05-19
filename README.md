@@ -26,6 +26,37 @@ class Tweet < ActiveRecord::Base
 end
 ```
 
+To attach the tag simply execute:
+
+```ruby
+tweet = Tweet.create(body: "Follow @rrubyist on Twitter")
+tweet.tags.add(name: '#followme')
+```
+
+To list the attached tags you can run
+
+```ruby
+tweet.tags
+```
+
+It will return you Array of Hashtag objects in this case.
+
+```ruby
+[#<Hashtag id: 2, name: "#followme", sticker: "default">]
+```
+
+If you want to search for all tweets attached to the `Hashtag` model with a name `#followme` you can do:
+
+```ruby
+Hashtag.search(where: { tag_name: ['#followme'], tag_kls: ['Hashtag'] }
+```
+
+Which returns:
+
+```ruby
+[#<Tweet id: 3, body: "Tweet #0">, #<Tweet id: 4, body: "Tweet #1">, #<Tweet id: 5, body: "Tweet #2">, #<Tweet id: 6, body: "Follow @rrubyist on Twitter">]
+```
+
 ### Requirements
 
 * ActiveRecord
