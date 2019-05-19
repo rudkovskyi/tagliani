@@ -9,11 +9,14 @@ RSpec.describe Gossips do
       end
   
       it "sets different elasticsearch index name" do
+        index_name_was = Gossips.config.elasticsearch.index
+
         described_class.configure do |config|
           config.elasticsearch.index = unique_index_name
         end
   
         expect(Gossips.config.elasticsearch.index).to eq(unique_index_name)
+        expect(Gossips::Search::Index.new(name: index_name_was).delete!).to be_truthy
       end
 
       context ".redis" do
