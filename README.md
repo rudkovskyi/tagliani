@@ -45,7 +45,7 @@ It will return you Array of Hashtag objects attached to the tweet.
 [#<Hashtag id: 2, name: "#followme", sticker: "default">]
 ```
 
-If you want to search for all tweets attached to the `Hashtag` model with a name `#followme` you can run
+If you want to search for all tweets attached to the `Hashtag` model with a name `#followme` you can run. (You don't have to specify `tag_kls`, unless you have multiple models that act as Tag model)
 
 ```ruby
 Hashtag.search(where: { tag_name: ['#followme'], tag_kls: ['Hashtag'] }
