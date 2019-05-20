@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gossips (0.1.0)
+    tagliani (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -72,13 +72,13 @@ DEPENDENCIES
   byebug
   database_cleaner
   elasticsearch
-  gossips!
   pry
   rake (~> 10.0)
   redis
   rspec
   rspec-mocks
   sqlite3
+  tagliani!
   timecop
 
 BUNDLED WITH

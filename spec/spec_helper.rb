@@ -1,14 +1,14 @@
 require 'bundler/setup'
 require 'byebug'
 require 'database_cleaner'
-require 'gossips'
+require 'tagliani'
 
 require 'activerecord/base'
 
-Gossips.configure do |config|
+Tagliani.configure do |config|
   config.elasticsearch.log = true
   config.elasticsearch.refresh = true
-  config.elasticsearch.index = "gossips_test_#{Time.now.to_i + rand(999)}"
+  config.elasticsearch.index = "tagliani_test_#{Time.now.to_i + rand(999)}"
 end
 
 RSpec.configure do |config|
@@ -18,11 +18,11 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    Gossips::Search::Index.create!
+    Tagliani::Search::Index.create!
   end
 
   config.after(:each) do
-    Gossips::Search::Index.delete!
+    Tagliani::Search::Index.delete!
   end
 
   # rspec-expectations config goes here. You can use an alternate
