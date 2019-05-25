@@ -16,8 +16,11 @@ module Tagliani
 
     def initialize(query = {})
       @index = Tagliani.config.elasticsearch.index
-      @query = query
       @client = self.class.client
+      @where_clause = query.delete(:where)
+      @query = query
+
+      build_where(@where_clause) if @where_clause
     end
 
     def response
@@ -40,6 +43,26 @@ module Tagliani
       models.flat_map do |model, ids|
         model.constantize.where(id: ids)
       end
+    end
+
+    private
+
+    def build_where(args)
+      @query[:query] ||= {}
+      @query[:query][:bool] ||= {}
+      @query[:query][:bool][:must] ||= []
+      
+      @query[:query][:bool][:must] << [
+        query_string: {
+          query: build_query_string(args)
+        }
+      ]
+    end
+
+    def build_query_string(args)
+      query = args.to_h.map do |key, val|
+        "(#{val.map { |object| "#{key}:#{object}" }.join(' OR ')})"
+      end.join(' AND ')
     end
   end
 end
