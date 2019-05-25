@@ -1,5 +1,3 @@
-![alt text](https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.quotesgram.com%2Fimg%2F23%2F86%2F1732449599-Friends-Quotes-Joey-Tribbiani.jpg&f=1)
-
 # Tagliani
 
 Blazing fast Ruby alternative to `acts-as-taggable-on` and other similar gems. Instead of million of records in the database it uses powerful ElasticSearch, which gives a very fast and scalable solution with a search capabilities of ElasticSearch.
