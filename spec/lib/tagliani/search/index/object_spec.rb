@@ -4,8 +4,8 @@ RSpec.describe Tagliani::Search::Index::Object do
   let(:tag_id) { rand(999) }
   let(:object) do
     {
-      model: model_class,
-      id: model_id,
+      object_kls: model_class,
+      object_id: model_id,
       created_at: Time.now.to_s,
       tag_id: tag_id,
       tag_type: 'default',

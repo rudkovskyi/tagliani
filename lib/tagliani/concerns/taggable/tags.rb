@@ -23,8 +23,8 @@ module Tagliani
             end
 
             @index.add!({
-              model: @parent.class.to_s,
-              id: @parent.id,
+              object_kls: @parent.class.to_s,
+              object_id: @parent.id,
               created_at: @parent.try(:created_at),
               tag_id: record.id,
               tag_kls: record.class.to_s,

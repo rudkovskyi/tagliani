@@ -41,6 +41,7 @@ module Tagliani
       def bulk!
         indices = Tagliani.redis.spop(@queue, @length)
         data = parse_data(indices, index_name: @name)
+        
         return false if data.empty?
 
         @search.client.bulk(body: data)

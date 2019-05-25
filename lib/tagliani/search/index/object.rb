@@ -7,13 +7,13 @@ module Tagliani
         end
 
         def id
-          "#{@object['model'].to_s.downcase}_#{@object['id']}_#{@object['tag_id']}"
+          "#{@object['object_kls'].to_s.downcase}_#{@object['object_id']}_#{@object['tag_id']}"
         end
 
         def to_h
           {
-            object_kls: @object['model'],
-            object_id: @object['id'],
+            object_kls: @object['object_kls'],
+            object_id: @object['object_id'],
             object_created_at: @object['created_at'].try(:strftime, '%Y-%m-%d %H:%M:%S'),
             tag_id: @object['tag_id'],
             tag_kls: @object['tag_kls'],
