@@ -6,5 +6,11 @@ describe Album do
       subject.tags.add(name: 'charming')
       expect(subject.tags.map(&:name)).to include('impressive', 'charming')
     end
+
+    it 'tags support where search' do
+      subject.tags.add(name: 'charming')
+      result = subject.tags.search(where: { tag_name: ['char*'] })
+      expect(result.map(&:name)).to include('charming')
+    end
   end
 end
