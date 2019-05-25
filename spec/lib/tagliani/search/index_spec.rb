@@ -75,7 +75,7 @@ RSpec.describe Tagliani::Search::Index do
       end
 
       it "adds object to array for bulk index" do
-        expect(described_class.new.add!(object, true)).to be(true)
+        expect(described_class.new.add!(object, async: true)).to be(true)
         expect(Tagliani.redis.smembers(Tagliani.config.redis.queue)).to be_present
       end
 

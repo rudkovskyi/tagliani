@@ -31,7 +31,7 @@ module Tagliani
               tag_type: record.sticker,
               tag_name: record.name,
               last_updated: Time.now
-            }, @async)
+            }, async: @async)
           end
         end
 

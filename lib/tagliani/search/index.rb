@@ -46,7 +46,7 @@ module Tagliani
         @search.client.bulk(body: data)
       end
 
-      def add!(schema, async = false)
+      def add!(schema, async: false)
         object = Object.new(schema)
 
         if async
