@@ -4,8 +4,8 @@ module Tagliani
       extend ActiveSupport::Concern
 
       module ClassMethods
-        def search(args = {})
-          Tagliani::Search.new(args).serialize(type: 'object')
+        def search(body: {}, where: nil)
+          Tagliani::Search.new(body: body, where: where).serialize(type: 'object')
         end
       end
     end

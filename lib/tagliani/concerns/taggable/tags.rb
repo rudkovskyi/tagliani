@@ -35,7 +35,7 @@ module Tagliani
           end
         end
 
-        def search(body = {})
+        def search(body: {}, where: nil)
           body.deep_merge!({          
             query: {
               bool: {
@@ -47,7 +47,7 @@ module Tagliani
             }
           })
 
-          Tagliani::Search.new(body).serialize(type: 'tag')
+          Tagliani::Search.new(body: body, where: where).serialize(type: 'tag')
         end
       end
     end

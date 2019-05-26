@@ -8,7 +8,7 @@ module Tagliani
         @schema = schema || Tagliani.config.schema.default
         @queue = queue || Tagliani.config.redis.queue
         @length = length || Tagliani.config.redis.length
-        @search = Tagliani::Search.new
+        @search = Tagliani::Search.new(body: {})
       end
 
       def create!
