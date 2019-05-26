@@ -14,17 +14,17 @@ module Tagliani
 
     attr_reader :client
 
-    def initialize(query = {})
+    def initialize(body:, where: nil)
       @index = Tagliani.config.elasticsearch.index
       @client = self.class.client
-      @where_clause = query.delete(:where)
-      @query = query
+      @where_clause = where
+      @body = body
 
       build_where(@where_clause) if @where_clause
     end
 
     def response
-      @client.search(index: @index, body: @query)
+      @client.search(index: @index, body: @body)
     end
 
     def serialize(type:)
@@ -48,11 +48,11 @@ module Tagliani
     private
 
     def build_where(args)
-      @query[:query] ||= {}
-      @query[:query][:bool] ||= {}
-      @query[:query][:bool][:must] ||= []
+      @body[:query] ||= {}
+      @body[:query][:bool] ||= {}
+      @body[:query][:bool][:must] ||= []
       
-      @query[:query][:bool][:must] << [
+      @body[:query][:bool][:must] << [
         query_string: {
           query: build_query_string(args)
         }
