@@ -55,7 +55,7 @@ module Tagliani
         else
           @search.client.index({
             index: @name,
-            type: 'doc',
+            type: "doc",
             id: object.id,
             body: object.to_h,
             refresh: true

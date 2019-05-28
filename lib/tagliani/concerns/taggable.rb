@@ -1,4 +1,4 @@
-require_relative 'taggable/tags'
+require_relative "taggable/tags"
 
 module Tagliani
   module Concerns

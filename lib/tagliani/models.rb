@@ -1,5 +1,5 @@
-require 'active_record'
-require 'active_support/concern'
+require "active_record"
+require "active_support/concern"
 
 module Tagliani
   module Models

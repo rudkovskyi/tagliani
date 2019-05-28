@@ -73,6 +73,11 @@ class Artist < ActiveRecord::Base
 end
 ```
 
+To index in bulks, simply execute:
+```ruby
+Tagliani::Search::Index.bulk!
+```
+
 ### Requirements
 
 * ActiveRecord
