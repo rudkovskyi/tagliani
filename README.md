@@ -81,6 +81,8 @@ Tagliani::Search::Index.bulk!
 ### Requirements
 
 * ActiveRecord
+* redis-client
+* elasticsearch
 
 To run this gem it is required to have ActiveRecord.
 
