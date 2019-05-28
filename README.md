@@ -12,6 +12,22 @@ gem 'tagliani'
 
 And run `bundle install` command.
 
+## Configuration
+
+In your rails app `config/initializers` create `tagliani.rb` with the following content
+
+```ruby
+Tagliani.configure do |config|
+  config.elasticsearch.url = "http://localhost:9200" # URL of your ElasticSearch service, by default set to this endpoint
+  config.elasticsearch.index = "tagliani_#{Rails.env}" # Index name
+  config.elasticsearch.refresh = true # false by default
+  config.elasticsearch.log = true # false by default
+  config.redis.url = "redis://localhost:6379/tagliani" # By default set to this endpoint
+  config.redis.queue = "tagliani" # By default set to this queue name
+  config.redis.length = 200 # By default set to 200. It is a queue length per bulk that is going to be sent to ElasticSearch
+end
+```
+
 ## Search
 
 Let's say inside the Rails application you have a model with a name "Hashtag", that represents all the tags attached to the model "Tweet".
