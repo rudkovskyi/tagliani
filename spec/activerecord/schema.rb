@@ -13,6 +13,7 @@ ActiveRecord::Schema.define do
 
   create_table :tweets, force: true do |t|
     t.string :body
+    t.integer :tweet_id
   end
 
   create_table :artists, force: true do |t|
