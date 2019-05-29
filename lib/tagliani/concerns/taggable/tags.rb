@@ -23,7 +23,7 @@ module Tagliani
             end
 
             @index.add!({
-              object_kls: @parent.class.to_s,
+              object_kls: parent_kls,
               object_id: @parent.id,
               created_at: @parent.try(:created_at),
               tag_id: record.id,
@@ -36,11 +36,11 @@ module Tagliani
         end
 
         def search(body: {}, where: nil)
-          body.deep_merge!({          
+          body.deep_merge!({
             query: {
               bool: {
                 must: [
-                  { match: { object_kls: @parent.class.to_s } },
+                  { match: { object_kls: parent_kls } },
                   { term: { object_id: @parent.id } }
                 ]
               }
@@ -48,6 +48,12 @@ module Tagliani
           })
 
           Tagliani::Search.new(body: body, where: where).serialize(type: 'tag')
+        end
+
+        private
+
+        def parent_kls
+          @parent.class.base_class.to_s 
         end
       end
     end
