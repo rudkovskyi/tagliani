@@ -50,6 +50,33 @@ module Tagliani
           Tagliani::Search.new(body: body, where: where).serialize(type: 'tag')
         end
 
+        def inherit
+          root.each do |object|
+            next if object.nil?
+            
+            self.class.new(object).each do |ref|
+              add(name: ref.name)
+            end
+          end
+        end
+
+        def root
+          klasses = []
+  
+          if @parent._inherit.respond_to?(:each)
+            klasses = @parent._inherit
+          else
+            klasses << @parent._inherit
+          end
+  
+          objects = klasses.flat_map do |method|
+            next if method.nil?
+            @parent.send(method)
+          end
+  
+          objects.compact
+        end
+
         private
 
         def parent_kls
