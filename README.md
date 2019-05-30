@@ -86,6 +86,15 @@ Tag name represents the `name` field of the `Hashtag` model.
 #<Tweet id: 5, body: "Tweet #2">, #<Tweet id: 6, body: "Follow @rrubyist on Twitter">]
 ```
 
+### More search
+
+In fact, you can do so much more with it. You are in power of using all the abilities of ElasticSearch. For example, you can search using a `*`. You can write `pro*` and match all tags that contain this part of the word at the beginning of the name tag.
+
+```ruby
+producer.tags.search(where: { tag_name: ["pro*"] })
+=> [#<Tag id: 3, name: "professor", sticker: "default">, #<Tag id: 4, name: "professional", sticker: "default">]
+```
+
 ## Asyncronous bulk index
 
 For a non-blocking processes you can enable option to index jobs in background queue.
