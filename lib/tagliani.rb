@@ -27,9 +27,10 @@ module Tagliani
   def taggable(options = {})
     Models.tagged << to_s
 
-    class_attribute :_tag_kls, :_async
+    class_attribute :_tag_kls, :_async, :_inherit
 
     self._tag_kls = options[:tag_kls] || "Tag"
+    self._inherit = options[:inherit]
     self._async = options[:async]
 
     class_eval do
