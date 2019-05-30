@@ -12,6 +12,14 @@ gem 'tagliani'
 
 And run `bundle install` command.
 
+### Requirements
+
+* ActiveRecord
+* redis-client
+* elasticsearch
+
+To run this gem it is required to have ActiveRecord.
+
 ## Configuration
 
 In your rails app `config/initializers` create `tagliani.rb` with the following content
@@ -94,13 +102,19 @@ To index in bulks, simply execute:
 Tagliani::Search::Index.bulk!
 ```
 
-### Requirements
+## Inherit tags from models
 
-* ActiveRecord
-* redis-client
-* elasticsearch
+You can specify the models you want to inherit tags from by adding an option `:inherit` with a list of models in the `taggable` method.
 
-To run this gem it is required to have ActiveRecord.
+```ruby
+class Album < ActiveRecord::Base
+  has_many :songs
+  belongs_to :artist
+  belongs_to :producer
+
+  taggable inherit: %i[artist producer]
+end
+```
 
 ## Contributing
 

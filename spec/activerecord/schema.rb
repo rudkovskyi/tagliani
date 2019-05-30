@@ -23,6 +23,11 @@ ActiveRecord::Schema.define do
   create_table :albums, force: true do |t|
     t.string :name
     t.integer :artist_id
+    t.integer :producer_id
+  end
+
+  create_table :producers, force: true do |t|
+    t.string :name
   end
 
   create_table :songs, force: true do |t|
